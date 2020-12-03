@@ -1,14 +1,15 @@
 #-------------------------------
 # General Site Settings
 
-title: Kross
+title: Letcloudinit
+
 logo: 
 author: themefisher
 description: this is meta description
-email: steve.fruits@email.com
-phone: +880 2544 658 256
-address: 125/A, CA Commercial Area, California, USA
-copyright: Copyright &copy; 2020 Designed by [Themefisher](https://themefisher.com) & Developed by [Getjekyllthemes](https://getjekyllthemes.com)
+email: info@letcloudinit.com
+#phone: +880 2544 658 256
+#address: 125/A, CA Commercial Area, California, USA
+copyright: Copyright &copy; 2020 Letcloudinit
 
 menu:
 - {name: About, link: '/about'}
@@ -38,7 +39,7 @@ disqus-identifier: # Add your shortname for Disqus Comment. For example mr-brown
 # Hero Section
 
 hero:
-  hero-title: Hi! I’m <br> Christoher <br> UX designer
+  hero-title: Hi! All <br> Welcome to <br> Cloud World 
 
 social:
 - {icon: "ti-facebook", link: "#"}

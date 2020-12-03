@@ -1,18 +1,21 @@
 ---
-layout: about
 title: About Me
-author: Johnathan Smith
+layout: about
+author: Vinoth Kumar
 image: assets/images/about/author.jpg
-signature: assets/images/about/signature.png
+social:
+- {icon: "ti-facebook", link: "#"}
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-commodo consequat.
+First a Sailor, then a strategist and now an entrepreneur. Fortunate
+to have worked in diverse and challenging environments. 
 
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-Excepteur sint occaecat cupidatat non proident.
+Now currently working as an Cloud Engineer and also providing
+Technical consultant as a freelance. Iniated the Letcloudinit to share my experience and knowledge.
 
-Deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia.
+Specialties: Software architecture for complex hetrogeneous
+enterprise applications. Inference engines, Configuration Engines,
+Knowledge Base Systems, Expert Systems and middle-ware
+platform
+
+I am a enthusiastic to learn a new technology and share my experince to people.
