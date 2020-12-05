@@ -2,6 +2,7 @@
 layout: default
 ---
 <!-- page title -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <section class="page-title-alt bg-primary position-relative">
   <div class="container">
     <div class="row">
@@ -28,11 +29,14 @@ layout: default
         {{ content }}
       </div>
       <div class="col-md-4 text-center drag-lg-top">
+          
         <div class="shadow-down mb-4">
           <img src="{{ site.baseurl }}/{{ page.image }}" alt="{{ page.author }}" class="img-fluid w-100 rounded-lg border-thick border-white">
         </div>
-        <img src="{{ site.baseurl }}/{{ page.signature }}" alt="signature" class="img-fluid">
+        {% comment %}<img src="{{ site.baseurl }}/{{ page.signature }}" alt="signature" class="img-fluid">{% endcomment %}
         <h4>{{ page.author }}</h4>
+         <a href="#" class="fa fa-facebook"></a>
+<a href="#" class="fa fa-twitter"></a>
       </div>
     </div>
   </div>
@@ -41,7 +45,7 @@ layout: default
 
 {% include work-process-section.html %}
 
-{% include team-section.html %}
+ {% comment %} {% include team-section.html %} {% endcomment %}
   
 <section class="section">
   <div class="container">
