@@ -14,8 +14,8 @@ Now currently working as an Cloud Engineer and also providing
 Technical consultant as a freelance. Iniated the Letcloudinit to share my experience and knowledge.
 
 Specialties: Software architecture for complex hetrogeneous
-enterprise applications. Inference engines, Configuration Engines,
+enterprise and opensource applications. Inference engines, Configuration Engines,
 Knowledge Base Systems, Expert Systems and middle-ware
 platform
 
-I am a enthusiastic to learn a new technology and share my experince to people.
+I am a enthusiastic person to learn a new technology and share my experince to people.
