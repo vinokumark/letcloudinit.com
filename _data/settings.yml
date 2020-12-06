@@ -32,8 +32,8 @@ blurb: >-
 blurb-btn-link: /blog
 blurb-btn-name: know more
 work-process:
-  - title: Research and Plan
-    icon: assets/images/icons/plan.png
+  - title: Cloud Hosting Support
+    icon: assets/images/icons/cloud.png
     content: >-
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
@@ -102,13 +102,13 @@ education:
 services-title: Services
 services:
   - name: UI Design
-    icon: ti-palette
+    icon: ti-cloud
     description: >-
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
     active: null
   - name: UX Design
-    icon: ti-vector
+    icon: ti-infinite
     description: >-
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
