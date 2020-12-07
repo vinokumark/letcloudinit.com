@@ -26,14 +26,13 @@ social:
   - icon: ti-twitter
     link: '#'
 blurb: >-
-  Hi All, Welcome to Letcloudinit. I created this webpage to share the new
-  technology and my experience in cloud with you friends.
-  Hope you enjoy the blog reading. I am not a expert in english,your feedback more helpful if you find something wrong in article. 
+  Hi All, Welcome to Letcloudinit. I created this webpage to share the new technology and my experience in the cloud with you friends. Also, we are providing Cloud, DevOps, and automation support.
+  Hope you enjoy the blog reading. Your feedback more helpful if you find something wrong in the article. 
 blurb-btn-link: /blog
 blurb-btn-name: know more
 work-process:
-  - title: Cloud Hosting Support
-    icon: assets/images/icons/cloud.png
+  - title: Plan
+    icon: assets/images/icons/plan.png
     content: >-
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
@@ -101,20 +100,18 @@ education:
     organization: Cardiff School
 services-title: Services
 services:
-  - name: UI Design
+  - name: Cloud Host Support
     icon: ti-cloud
     description: >-
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
+      We are ready to help various cloud provide and build the environment based on your need 
     active: null
-  - name: UX Design
+  - name: Devops
     icon: ti-infinite
     description: >-
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
+      Stop the rebitted workflow and cosuming .
     active: true
   - name: Interaction Design
-    icon: ti-panel
+    icon: ti-time
     description: >-
       Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua.
