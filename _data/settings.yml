@@ -100,21 +100,20 @@ education:
     organization: Cardiff School
 services-title: Services
 services:
-  - name: Cloud Host Support
+  - name: Cloud Host
     icon: ti-cloud
     description: >-
-      We are ready to help various cloud provide and build the environment based on your need 
+      Move your legacy application to Cloud. Truck how much your application reduced the downtime. 
     active: null
   - name: Devops
     icon: ti-infinite
     description: >-
-      Stop the rebitted workflow and cosuming .
+      Make the application deployment using DevOps methodology and more focus on your development.
     active: true
   - name: Interaction Design
     icon: ti-time
     description: >-
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-      tempor incididunt ut labore et dolore magna aliqua.
+      Stop the repeated process and manual activity. Save your time, with automation, make your infrastructure robust.
     active: null
 portfolio-home-items:
   - image: assets/images/portfolio/item-1.png
