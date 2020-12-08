@@ -1,17 +1,13 @@
 ---
 title: Hashicorp Vault IAM Authentication
 layout: post
-image: "/assets/images/blog/post-2.jpg"
+image: assets/images/blog/post-6.jpg
+author: Vinoth
+tags: []
 ---
 
-test
-yofdfd
-fdhfdh
-dfhfdh
-dfhdfh
-dfhfdhfdh
+Hope you aware of the [Hashicorp Vault](http://https://www.vaultproject.io/).  There are different auth methods available to connect the vault server or cluster.
 
-[![asciicast](https://asciinema.org/a/14.png)](https://asciinema.org/a/14)
-<p>This is some text.</p>
-<script src="https://asciinema.org/a/14.js" id="asciicast-14" async></script>
-<p>This is some other text.</p>
+One method is AWS IAM authentication. We will see explore here the AWS IAM auth method with a simple dev vault server.
+
+Article coming soon...

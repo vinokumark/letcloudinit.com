@@ -15,7 +15,7 @@ menu:
 google-analytics: UA-184809044-1
 disqus-identifier: null
 hero:
-  hero-title: Hi! All <br> Welcome to <br> Cloud World
+  hero-title: Hi! All <br> Welcome to <br> the Cloud World
 social:
   - icon: ti-facebook
     link: '#'
@@ -30,7 +30,7 @@ blurb: >-
   Hope you enjoy the blog reading. Your feedback more helpful if you find something wrong in the article. 
 blurb-btn-link: /blog
 blurb-btn-name: know more
-Our work-process:
+work-process:
   - title: Plan
     icon: assets/images/icons/plan.png
     content: >-
@@ -38,8 +38,7 @@ Our work-process:
   - title: Design and Develop
     icon: assets/images/icons/design.png
     content: >-
-            Design and Develop based on the requirement. We will design and develop more robust infra, zeroless downtime.
-      
+      Design and Develop based on the requirement. We will design and develop more robust infra, zeroless downtime.      
   - title: Deliver
     icon: assets/images/icons/print.png
     content: >-

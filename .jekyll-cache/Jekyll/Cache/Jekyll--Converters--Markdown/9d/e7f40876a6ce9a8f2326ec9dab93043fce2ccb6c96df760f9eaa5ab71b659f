@@ -1,0 +1,6 @@
+I"R<p>Hope you aware of the <a href="http://https://www.vaultproject.io/">Hashicorp Vault</a>.  There are different auth methods available to connect the vault server or cluster.</p>
+
+<p>One method is AWS IAM authentication. We will see explore here the AWS IAM auth method with a simple dev vault server.</p>
+
+<p>Article coming soon…</p>
+:ET
