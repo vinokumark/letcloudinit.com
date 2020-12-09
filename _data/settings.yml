@@ -108,10 +108,10 @@ services:
     description: >-
       Make the application deployment using DevOps methodology and more focus on your development.
     active: true
-  - name: Interaction Design
+  - name: Automation
     icon: ti-time
     description: >-
-      Stop the repeated process and manual activity. Save your time, with automation, make your infrastructure robust.
+      Stop the repeated process and manual task activity. Save your time, with automation, make your infrastructure robust.
     active: null
 portfolio-home-items:
   - image: assets/images/portfolio/item-1.png
