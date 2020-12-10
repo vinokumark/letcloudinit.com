@@ -1,0 +1,88 @@
+I"N<p>Hope you aware of the <a href="http://https://www.vaultproject.io/">Hashicorp Vault</a>.  There are different auth methods available to connect the vault server or cluster.</p>
+
+<p>One of the methods is AWS IAM authentication. We will see explore here the AWS IAM auth method with a simple dev vault server.</p>
+
+<p><strong>Vault server</strong></p>
+
+<p>We used Vault dev as a standalone server. For vault installation, please refer the vault <a href="https://www.vaultproject.io/docs/install">document</a>.</p>
+
+<p><strong>config.hcl</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ui = true
+
+#mlock = true
+disable_mlock = true
+
+listener "tcp" {
+  address     = "172.31.32.239:8200"
+  tls_disable = 1
+}
+
+api_addr = "http://your-instance-ip:8200"
+
+</code></pre></div></div>
+<p>Before going to launch the vault server. Create a simple IAM role with a simple policy, you can edit based on your requirement.</p>
+
+<h1 id="recommended-vault-iam-policy"><strong>Recommended Vault IAM Policy</strong></h1>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:DescribeInstances",
+        "iam:GetInstanceProfile",
+        "iam:GetUser",
+        "iam:GetRole"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Effect": "Allow",
+      "Action": ["sts:AssumeRole"],
+      "Resource": ["arn:aws:iam::&lt;AccountId&gt;:role/&lt;VaultRole&gt;"]
+    },
+    {
+      "Sid": "ManageOwnAccessKeys",
+      "Effect": "Allow",
+      "Action": [
+        "iam:CreateAccessKey",
+        "iam:DeleteAccessKey",
+        "iam:GetAccessKeyLastUsed",
+        "iam:GetUser",
+        "iam:ListAccessKeys",
+        "iam:UpdateAccessKey"
+      ],
+      "Resource": "arn:aws:iam::*:user/${aws:username}"
+    }
+  ]
+}
+</code></pre></div></div>
+
+<p><strong>Initiated the vault server</strong></p>
+
+<p>vault server -dev -config=config.hcl</p>
+
+<p>Log in with your root token and enable the AWS auth method</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vault auth enable aws
+</code></pre></div></div>
+<p>**Create  a policy with capabilities
+**</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vault policy write "example-policy" -&lt;&lt;EOF
+path "secret/data/*" {
+  capabilities = ["create", "read", "update", "delete", "list", "sudo"]
+}
+EOF
+</code></pre></div></div>
+<p><strong>Map your policy with a secific role</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vault write auth/aws/role/vaul-test auth_type=iam \
+              bound_iam_principal_arn=arn:aws:iam::562853193375:role/vault-test policies=example-policy max_ttl=500h
+</code></pre></div></div>
+
+<p>Make sure the IAM role is mapped to the instance for getting the STS identity.</p>
+
+<script id="asciicast-5IamVIPi22clgzwSCAu60WdEO" src="https://asciinema.org/a/5IamVIPi22clgzwSCAu60WdEO.js" async=""></script>
+
+:ET
