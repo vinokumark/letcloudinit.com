@@ -27,12 +27,13 @@ listener "tcp" {
   tls_disable = 1
 }
 
-api_addr = "http://your-instance-ip:8200"
+ api_addr = "http://your-instance-ip:8200"
 
 ```
-Before going to launch the vault server. Create a simple IAM role with a simple policy, you can edit based on your requirement.
+ Before going to launch the vault server. Create a simple IAM role with a simple policy, you can edit based on your requirement.
 
 # **Recommended Vault IAM Policy**
+
 ```
 {
   "Version": "2012-10-17",
@@ -67,7 +68,9 @@ Before going to launch the vault server. Create a simple IAM role with a simple 
     }
   ]
 }
+	
 ```
+
 
 **Initiated the vault server**
 
@@ -78,8 +81,9 @@ Log in with your root token and enable the AWS auth method
 ```
 vault auth enable aws
 ```
-**Create  a policy with capabilities
-**
+
+**Create  a policy with capabilities**
+
 ```
 vault policy write "example-policy" -<<EOF
 path "secret/data/*" {
@@ -94,6 +98,6 @@ vault write auth/aws/role/vaul-test auth_type=iam \
               bound_iam_principal_arn=arn:aws:iam::562853193375:role/vault-test policies=example-policy max_ttl=500h
 ```
 																								
-Make sure the IAM role is mapped to the instance for getting the STS get-caller-identity.
+> Make sure the IAM role is mapped to the instance for getting the STS get-caller-identity.
 
 <script id="asciicast-378383" src="https://asciinema.org/a/378383.js" async></script>
