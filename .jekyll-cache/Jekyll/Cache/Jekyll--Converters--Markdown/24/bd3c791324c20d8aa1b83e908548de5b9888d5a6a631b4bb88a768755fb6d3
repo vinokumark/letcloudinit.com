@@ -1,0 +1,8 @@
+I"³<p>Hope you all of you know the terrafrom is a IaC(Infrastructure as a code) provider. The beauty of terraform not only support multiple cloud infrastructure, we can also use it application configuration and CICD tool prespective.</p>
+
+<p>One of our requirement is migrate all artifactory repository into terrafrom state file. We all know the terrafrom have import option to import existing cofiguration into state file.</p>
+
+<p>But the terraform import only import single resources at a time.</p>
+
+<p>Warning: Terraform expects that each remote object it is managing will be bound to only one resource address, which is normally guaranteed by Terraform itself having created all objects. If you import existing objects into Terraform, be careful to import each remote object to only one Terraform resource address. If you import the same object multiple times, Terraform may exhibit unwanted behavior. For more information on this assumption</p>
+:ET

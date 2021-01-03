@@ -1,0 +1,35 @@
+I"«<p>Hope all of you know the terraform is an IaC(Infrastructure as a code) provider. The beauty of terraform not only supports multiple cloud infrastructure, we can also use its application configuration and CICD tool perspective.</p>
+
+<p>One of our requirements is to migrate all artifactory repository into terrafrom state file. We all know the terraform has an import option to import the existing configuration into state file.</p>
+
+<p>But the terraform import only imports a single resource at a time.</p>
+
+<blockquote>
+  <p>Warning: Terraform expects that each remote object it is managing will be bound to only one resource address, which is normally guaranteed by Terraform itself having created all objects. If you import existing objects into Terraform, be careful to import each remote object to only one Terraform resource address. If you import the same object multiple times, Terraform may exhibit unwanted behavior. For more information on this assumption</p>
+</blockquote>
+
+<p>We have n number of repositary in artifact. So doing invidual resource import bore and time consuming.</p>
+
+<p>Used simple bash script to import all repository into state file. Let see the method</p>
+
+<p>Get the list of repoistory names using the API with curl</p>
+
+<div class="language-awk highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">curl</span> <span class="o">-</span><span class="nx">u</span> <span class="nx">testing</span><span class="p">:</span><span class="nx">Testing</span><span class="err">@</span><span class="mi">12345</span> <span class="o">-</span><span class="nx">X</span> <span class="nx">GET</span> <span class="s2">"https://terraformtest.jfrog.io/artifactory/api/repositories"</span> <span class="o">|</span> <span class="nx">grep</span> <span class="nx">key</span> <span class="o">|</span> <span class="nx">awk</span> <span class="err">'</span><span class="p">{</span><span class="nb">gsub</span><span class="p">(</span><span class="sr">/"/</span><span class="p">,</span> <span class="s2">""</span><span class="p">,</span> <span class="nv">$3</span><span class="p">);</span> <span class="k">print</span> <span class="s2">"set"</span><span class="p">,</span> <span class="nv">$3</span><span class="p">}</span><span class="err">'</span> <span class="o">|</span> <span class="nx">awk</span> <span class="o">-</span><span class="nx">F</span><span class="err">'</span><span class="p">[,</span> <span class="p">]</span><span class="err">'</span> <span class="err">'</span><span class="p">{</span><span class="k">print</span> <span class="nv">$2</span><span class="p">}</span><span class="err">'</span> <span class="o">&gt;&gt;</span> <span class="nx">list_of_repo</span><span class="p">.</span><span class="nx">txt</span>
+</code></pre></div></div>
+
+<p>Here the script read the text file and import to state file line by line</p>
+
+<div class="language-awk highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">input</span><span class="o">=</span><span class="s2">"list_of_repo.txt"</span>
+
+<span class="k">while</span> <span class="nx">IFS</span><span class="o">=</span> <span class="nx">read</span> <span class="o">-</span><span class="nx">r</span> <span class="nx">line</span>
+<span class="k">do</span>
+  <span class="nx">cat</span> <span class="o">&lt;&lt;</span> <span class="nx">EOF</span> <span class="o">&gt;&gt;</span> <span class="nx">main</span><span class="p">.</span><span class="nx">tf</span> 
+	<span class="nx">resource</span> <span class="s2">"artifactory_local_repository"</span> <span class="s2">"$line"</span> <span class="p">{</span>
+
+	<span class="p">}</span>
+<span class="nx">EOF</span>
+
+<span class="nx">terraform</span> <span class="nx">import</span> <span class="nx">artifactory_local_repository</span><span class="p">.</span><span class="nv">$line</span> <span class="nv">$line</span>
+  <span class="nx">done</span> <span class="o">&lt;</span> <span class="s2">"$input"</span>
+</code></pre></div></div>
+:ET

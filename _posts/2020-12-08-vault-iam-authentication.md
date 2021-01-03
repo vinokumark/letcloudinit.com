@@ -16,7 +16,7 @@ We used Vault dev as a standalone server. For vault installation, please refer t
 
 **config.hcl**
 
-```
+```awk
 ui = true
 
 #mlock = true
@@ -34,7 +34,7 @@ listener "tcp" {
 
 # **Recommended Vault IAM Policy**
 
-```
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -78,13 +78,13 @@ vault server -dev -config=config.hcl
 
 Log in with your root token and enable the AWS auth method
 
-```
+```awk
 vault auth enable aws
 ```
 
 **Create  a policy with capabilities**
 
-```
+```awk
 vault policy write "example-policy" -<<EOF
 path "secret/data/*" {
   capabilities = ["create", "read", "update", "delete", "list", "sudo"]
@@ -93,9 +93,9 @@ EOF
 ```
 **Map your policy with a secific role**
 
-```
+```awk
 vault write auth/aws/role/vaul-test auth_type=iam \
-              bound_iam_principal_arn=arn:aws:iam::562853193375:role/vault-test policies=example-policy max_ttl=500h
+              bound_iam_principal_arn=arn:aws:iam::562853193375:role/vault-test policies=example-policy max_ttl=500h.
 ```
 																								
 > Make sure the IAM role is mapped to the instance for getting the STS get-caller-identity.

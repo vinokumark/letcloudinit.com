@@ -1,0 +1,93 @@
+I"e<p>Hope you aware of the <a href="http://https://www.vaultproject.io/">Hashicorp Vault</a>.  There are different auth methods available to connect the vault server or cluster.</p>
+
+<p>One of the methods is AWS IAM authentication. We will see explore here the AWS IAM auth method with a simple dev vault server.</p>
+
+<p><strong>Vault server</strong></p>
+
+<p>We used Vault dev as a standalone server. For vault installation, please refer the vault <a href="https://www.vaultproject.io/docs/install">document</a>.</p>
+
+<p><strong>config.hcl</strong></p>
+
+<div class="language-awk highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">ui</span> <span class="o">=</span> <span class="nx">true</span>
+
+<span class="c1">#mlock = true</span>
+<span class="nx">disable_mlock</span> <span class="o">=</span> <span class="nx">true</span>
+
+<span class="nx">listener</span> <span class="s2">"tcp"</span> <span class="p">{</span>
+  <span class="nx">address</span>     <span class="o">=</span> <span class="s2">"172.31.32.239:8200"</span>
+  <span class="nx">tls_disable</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="p">}</span>
+
+ <span class="nx">api_addr</span> <span class="o">=</span> <span class="s2">"http://your-instance-ip:8200"</span>
+
+</code></pre></div></div>
+<p>Before going to launch the vault server. Create a simple IAM role with a simple policy, you can edit based on your requirement.</p>
+
+<h1 id="recommended-vault-iam-policy"><strong>Recommended Vault IAM Policy</strong></h1>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"ec2:DescribeInstances"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:GetInstanceProfile"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:GetUser"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:GetRole"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"sts:AssumeRole"</span><span class="p">],</span><span class="w">
+      </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"arn:aws:iam::&lt;AccountId&gt;:role/&lt;VaultRole&gt;"</span><span class="p">]</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ManageOwnAccessKeys"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"iam:CreateAccessKey"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:DeleteAccessKey"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:GetAccessKeyLastUsed"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:GetUser"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:ListAccessKeys"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"iam:UpdateAccessKey"</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="nl">"Resource"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:iam::*:user/${aws:username}"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+	
+</span></code></pre></div></div>
+
+<p><strong>Initiated the vault server</strong></p>
+
+<p>vault server -dev -config=config.hcl</p>
+
+<p>Log in with your root token and enable the AWS auth method</p>
+
+<div class="language-awk highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">vault</span> <span class="nx">auth</span> <span class="nx">enable</span> <span class="nx">aws</span>
+</code></pre></div></div>
+
+<p><strong>Create  a policy with capabilities</strong></p>
+
+<div class="language-awk highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">vault</span> <span class="nx">policy</span> <span class="nx">write</span> <span class="s2">"example-policy"</span> <span class="o">-&lt;&lt;</span><span class="nx">EOF</span>
+<span class="nx">path</span> <span class="s2">"secret/data/*"</span> <span class="p">{</span>
+  <span class="nx">capabilities</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"create"</span><span class="p">,</span> <span class="s2">"read"</span><span class="p">,</span> <span class="s2">"update"</span><span class="p">,</span> <span class="s2">"delete"</span><span class="p">,</span> <span class="s2">"list"</span><span class="p">,</span> <span class="s2">"sudo"</span><span class="p">]</span>
+<span class="p">}</span>
+<span class="nx">EOF</span>
+</code></pre></div></div>
+<p><strong>Map your policy with a secific role</strong></p>
+
+<div class="language-awk highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">vault</span> <span class="nx">write</span> <span class="nx">auth</span><span class="o">/</span><span class="nx">aws</span><span class="o">/</span><span class="nx">role</span><span class="o">/</span><span class="nx">vaul</span><span class="o">-</span><span class="nx">test</span> <span class="nx">auth_type</span><span class="o">=</span><span class="nx">iam</span> <span class="err">\</span>
+              <span class="nx">bound_iam_principal_arn</span><span class="o">=</span><span class="nx">arn</span><span class="p">:</span><span class="nx">aws</span><span class="p">:</span><span class="nx">iam</span><span class="p">::</span><span class="mi">562853193375</span><span class="p">:</span><span class="nx">role</span><span class="o">/</span><span class="nx">vault</span><span class="o">-</span><span class="nx">test</span> <span class="nx">policies</span><span class="o">=</span><span class="nx">example</span><span class="o">-</span><span class="nx">policy</span> <span class="nx">max_ttl</span><span class="o">=</span><span class="mi">500</span><span class="nx">h</span><span class="p">.</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>Make sure the IAM role is mapped to the instance for getting the STS get-caller-identity.</p>
+</blockquote>
+
+<script id="asciicast-378383" src="https://asciinema.org/a/378383.js" async=""></script>
+
+:ET
